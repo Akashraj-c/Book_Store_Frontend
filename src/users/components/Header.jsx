@@ -11,10 +11,11 @@ const Header = () => {
 
   const navigate = useNavigate()
 
+  // logout
   const handleLogout = () => {
     sessionStorage.removeItem('token')
     sessionStorage.removeItem('existingUser')
-    navigate('/')
+    navigate('/login')
   }
 
   useEffect(() => {
@@ -54,7 +55,8 @@ const Header = () => {
               {dropDownStatus && <div class="absolute right-0 z-10 mt-2 w-30 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black/5 focus:outline-hidden" role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabIndex="-1">
                 <div className="py-1" role="none">
                   <Link to={'/profile'}> <p className="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabIndex="-1" id="menu-item-0"><FontAwesomeIcon icon={faAddressCard} className='me-2' /> Profile</p></Link>
-                  <button className="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabIndex="-1" id="menu-item-1"><FontAwesomeIcon icon={faPowerOff} className='me-2' /> Logout</button>
+
+                  <button onClick={handleLogout} className="block px-4 py-2 text-sm text-gray-700 cursor-pointer" role="menuitem" tabIndex="-1" id="menu-item-1"><FontAwesomeIcon icon={faPowerOff} className='me-2' /> Logout</button>
 
                 </div>
               </div>}

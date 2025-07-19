@@ -108,15 +108,23 @@ const Auth = ({ register }) => {
   }
 
   // user googlelogin
-  const handleGoogleLogin =async(credentialResponse)=>{
+  const handleGoogleLogin = async (credentialResponse) => {
     const details = jwtDecode(credentialResponse.credential)
     console.log(details);
-    
-    const result = await googleLoginApi({username:details.name,email:details.email,password:'googlepswd',photo:details.picture})
+
+    const result = await googleLoginApi({ username: details.name, email: details.email, password: 'googlepswd', photo: details.picture })
     console.log(result);
-    // if(result.status==200){
-    //   alert("login successfully")
-    // }
+    if (result.status == 200) {
+      toast.success("login successfully")
+      sessionStorage.setItem("existingUser", JSON.stringify(result.data.existingUser))
+      sessionStorage.setItem("token", result.data.token)
+      setTimeout(() => {
+        navigate('/')
+      }, 2500)
+    }
+    else {
+      toast.info('something went wrong')
+    }
   }
 
   return (
